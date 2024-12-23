@@ -1,0 +1,6 @@
+# https://visualstudio.microsoft.com/pt-br/visual-cpp-build-tools/
+
+crewai
+crewiai-tools
+langchain-openai
+dotenv
