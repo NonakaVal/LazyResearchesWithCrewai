@@ -1,0 +1,3 @@
+Ten simple rules for good research practice - PMC - PubMed Central
+Link: https://pmc.ncbi.nlm.nih.gov/articles/PMC9223329/
+Snippet: Organizing the study artifacts in a structured way greatly facilitates the reuse of data and code within and outside the lab, enhancing collaborations and partnerships. This article provides valuable insights into best practices for conducting useful research for learning.

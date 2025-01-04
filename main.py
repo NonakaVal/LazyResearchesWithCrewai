@@ -25,13 +25,13 @@ os.environ["SERPER_API_KEY"] = os.getenv("SERPER_API_KEY")
 # Initialize the language model
 llm = ChatOpenAI(
     model="gpt-3.5-turbo",
-    temperature=0.1,
+    temperature=0.2,
     max_tokens=1500
 )
 
 # Initialize tools
-search_tool = SerperDevTool()
-scrape_tool = ScrapeWebsiteTool()
+search_tool = SerperDevTool(n_results=12)
+scrape_tool = ScrapeWebsiteTool(  )
 
 tools = [search_tool, scrape_tool]
 
