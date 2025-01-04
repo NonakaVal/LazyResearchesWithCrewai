@@ -1,3 +1,5 @@
+
+
 from builtins import input, print
 import os
 from crewai import Agent, Task, Crew, Process
@@ -30,6 +32,7 @@ llm = ChatOpenAI(
 # Initialize tools
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
+
 tools = [search_tool, scrape_tool]
 
 ############################################################################################################
