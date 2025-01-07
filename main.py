@@ -30,7 +30,7 @@ llm = ChatOpenAI(
 )
 
 # Initialize tools
-search_tool = SerperDevTool(n_results=12)
+search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool(  )
 
 tools = [search_tool, scrape_tool]
@@ -201,7 +201,8 @@ article_writing_task = Task(
     agent=scientific_writer,
     async_execution=False,
     context=[research_management_task, data_collection_task, data_analysis_task, data_review_task],
-    output_file=os.path.join(output_directory, "4-final-report.md")
+    output_file=os.path.join(output_directory, "4-final-report.md"),
+    human_input=True
 )
 
 
