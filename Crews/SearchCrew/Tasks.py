@@ -14,7 +14,7 @@ import os
 # output_file: The file path where the output of the task should be saved.
 ############################################################################################################
 
-def create_tasks(question, context_topic, output_directory, Agents):
+def Search_tasks(question, context_topic, output_directory, Agents):
     # Research Management Task
     research_management_task = Task(
         description=f"Identify and validate the most reliable websites and sources to address the question: {question}.",
@@ -91,3 +91,4 @@ def create_tasks(question, context_topic, output_directory, Agents):
 
 
     return Tasks
+

@@ -1,15 +1,17 @@
 from builtins import input, print
-from Crews.SearchCrew.Agents import Search_crew
-from Crews.SearchCrew.Tasks import create_tasks
-from crewai import Crew, Process
-
-import os
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from crewai import Crew, Process
+import os
 
+# Importing the relevant agents and tasks
+from Crews.SearchCrew.Agents import Search_Agents
+from Crews.SearchCrew.Tasks import Search_tasks
+from Crews.StudyPlanCrew.Agents import create_study_project_agents
+from Crews.StudyPlanCrew.Tasks import create_study_project_roadmap_tasks
 
+# Load environment variables
 load_dotenv()
-
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["SERPER_API_KEY"] = os.getenv("SERPER_API_KEY")
 
@@ -29,62 +31,54 @@ def select_output_directory():
         os.makedirs(output_dir)
     return output_dir
 
-output_directory = select_output_directory()
-context_topic = input("Enter the research context: \n")
-question = input("Enter the research question: \n")
 
+############################################################################################################
+# Function to select the crew
+############################################################################################################
+def select_crew():
+    print("Select the crew you want to use:")
+    print("1. Search Crew")
+    print("2. Study Plan Crew")
+    crew_choice = input("Enter 1 or 2: ")
+    
+    if crew_choice == "1":
+        context_topic = input("Enter the research context for Search Crew: \n")
+        question = input("Enter the research question for Search Crew: \n")
+        agents = Search_Agents(context_topic, question, llm)
+        tasks = Search_tasks(question, context_topic, select_output_directory(), agents)
+    elif crew_choice == "2":
+        context_topic = input("Enter the research context for Study Plan Crew: \n")
+        question = input("Enter the research question for Study Plan Crew: \n")  # Adding question input here
+        agents = create_study_project_agents(context_topic, question, llm)
+        tasks = create_study_project_roadmap_tasks(context_topic, select_output_directory(), agents)
+    else:
+        print("Invalid choice, defaulting to Search Crew.")
+        context_topic = input("Enter the research context for Search Crew: \n")
+        question = input("Enter the research question for Search Crew: \n")
+        agents = Search_Agents(context_topic, question, llm)
+        tasks = Search_tasks(question, context_topic, select_output_directory(), agents)
 
-
+    return agents, tasks, context_topic, question
 
 
 ############################################################################################################
-########################                    App Setup                    ######################################
+# Selecting the crew and initializing tasks
 ############################################################################################################
-# Load environment variables 
+agents, tasks, context_topic, question = select_crew()
 
-# You can get your API keys from the following websites:
-# https://platform.openai.com/
-# https://serper.dev/
-
-
-
-############################################################################################################
-########################                    AGENTS                    ######################################
-############################################################################################################
-# about agent parameters
-# role: The role of the agent in the research process.
-# goal: The goal of the agent in the research process.
-# backstory: A description of the agent's background and experience.
-# llm: The language model used by the agent.
-# allow_delegation: Whether the agent is allowed to delegate tasks to other agents.
-# tools: A list of tools that the agent can use to perform tasks.
-############################################################################################################
-###########################################################################################################
-
-
-
-Agents = Search_crew(context_topic, question, llm)
-Tasks = create_tasks(question, context_topic, output_directory, Agents)
-
-                                                                                                    
-############################################################################################################
-########################                    crew######                #####################################
-############################################################################################################
-
-
-# Setting up the team (Crew)
+# Setting up the crew (Crew)
 crew = Crew(
     # List of agents in the crew
-    agents=Agents, 
+    agents=agents,
 
     # List of tasks to be performed by the crew
-    tasks=Tasks,
+    tasks=tasks,
 
     process=Process.sequential,  # Sequential process for task execution
-    manager_llm=llm, # Setting the LLM to manage the crew
-    verbose =True
+    manager_llm=llm,  # Setting the LLM to manage the crew
+    verbose=True
 )
 
-# Starting the process with a specific transcription path (pdf_path)
+# Starting the process
 result = crew.kickoff()
 print(result)

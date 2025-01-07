@@ -10,7 +10,6 @@ scrape_tool = ScrapeWebsiteTool()
 
 tools = [search_tool, scrape_tool]
 
-
 ############################################################################################################
 ########################                    App Setup                    ######################################
 ############################################################################################################
@@ -19,8 +18,6 @@ tools = [search_tool, scrape_tool]
 # You can get your API keys from the following websites:
 # https://platform.openai.com/
 # https://serper.dev/
-
-
 
 ############################################################################################################
 ########################                    AGENTS                    ######################################
@@ -35,9 +32,8 @@ tools = [search_tool, scrape_tool]
 ############################################################################################################
 ############################################################################################################
 
-def Search_crew(context_topic, question, llm):
+def Search_Agents(context_topic, question, llm):
 # Researcher
-
     researcher = Agent(
         role=f"Senior Research Specialist in {context_topic}",
         goal=f"Identify and validate the best online sources for gathering reliable and relevant information on {context_topic}.",
@@ -50,9 +46,7 @@ def Search_crew(context_topic, question, llm):
         tools=tools
     )
 
-
     # Chief Researcher
-
     chief_researcher = Agent(
         role="Chief Researcher",
         goal=f"Define new, relevant questions based on initial findings and validate the most reliable sources on {context_topic}.",
@@ -77,7 +71,6 @@ def Search_crew(context_topic, question, llm):
     )
 
 
-
     # Data Analyst
     data_analyst = Agent(
         role="Senior Data Analyst",
@@ -87,8 +80,6 @@ def Search_crew(context_topic, question, llm):
         allow_delegation=False,
         tools=tools
     )
-
-
 
     # Academic Reviewer
     academic_reviewer = Agent(
@@ -111,4 +102,6 @@ def Search_crew(context_topic, question, llm):
     )
 
     Agents = [researcher, chief_researcher, data_miner, data_analyst, academic_reviewer, scientific_writer]
+
+
     return Agents
