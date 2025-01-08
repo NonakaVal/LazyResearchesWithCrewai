@@ -4,3 +4,4 @@ crewai
 crewiai-tools
 langchain-openai
 dotenv
+tabulate

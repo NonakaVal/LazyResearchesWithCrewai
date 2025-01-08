@@ -4,18 +4,20 @@ from dotenv import load_dotenv
 from crewai import Crew, Process
 import os
 
-# Importing the relevant agents and tasks
+# Importando agentes e tarefas de diferentes equipes
 from Crews.SearchCrew.Agents import Search_Agents
 from Crews.SearchCrew.Tasks import Search_tasks
 from Crews.StudyPlanCrew.Agents import create_study_project_agents
 from Crews.StudyPlanCrew.Tasks import create_study_project_roadmap_tasks
+from Crews.GameNewsCrew.Agents import create_game_news_agents
+from Crews.GameNewsCrew.Tasks import create_game_news_scraping_tasks
 
-# Load environment variables
+# Carregar variáveis de ambiente
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["SERPER_API_KEY"] = os.getenv("SERPER_API_KEY")
 
-# Initialize the language model
+# Inicializar o modelo de linguagem
 llm = ChatOpenAI(
     model="gpt-3.5-turbo",
     temperature=0.2,
@@ -23,7 +25,7 @@ llm = ChatOpenAI(
 )
 
 ############################################################################################################
-# Function to select the output directory
+# Função para selecionar o diretório de saída
 ############################################################################################################
 def select_output_directory():
     output_dir = input("Choose the name of the directory to be created to save your summaries. \n")
@@ -33,52 +35,66 @@ def select_output_directory():
 
 
 ############################################################################################################
-# Function to select the crew
+# Função para selecionar a equipe
 ############################################################################################################
 def select_crew():
     print("Select the crew you want to use:")
     print("1. Search Crew")
     print("2. Study Plan Crew")
-    crew_choice = input("Enter 1 or 2: ")
+    print("3. Game News Crew")
+    crew_choice = input("Enter 1, 2, or 3: ")
     
     if crew_choice == "1":
         context_topic = input("Enter the research context for Search Crew: \n")
         question = input("Enter the research question for Search Crew: \n")
         agents = Search_Agents(context_topic, question, llm)
         tasks = Search_tasks(question, context_topic, select_output_directory(), agents)
+        return agents, tasks, context_topic, question
     elif crew_choice == "2":
         context_topic = input("Enter the research context for Study Plan Crew: \n")
-        question = input("Enter the research question for Study Plan Crew: \n")  # Adding question input here
+        question = input("Enter the research question for Study Plan Crew: \n")
         agents = create_study_project_agents(context_topic, question, llm)
         tasks = create_study_project_roadmap_tasks(context_topic, select_output_directory(), agents)
+        return agents, tasks, context_topic, question
+    elif crew_choice == "3":
+        context_topic = input("Enter the gaming topic or genre for Game News Crew: \n")
+        news_category = input("Enter the news category (e.g., reviews, updates, launches): \n")
+        agents = create_game_news_agents(llm)
+        tasks = create_game_news_scraping_tasks(context_topic, news_category, select_output_directory(), agents)
+        return agents, tasks, context_topic, None
     else:
         print("Invalid choice, defaulting to Search Crew.")
         context_topic = input("Enter the research context for Search Crew: \n")
         question = input("Enter the research question for Search Crew: \n")
         agents = Search_Agents(context_topic, question, llm)
         tasks = Search_tasks(question, context_topic, select_output_directory(), agents)
-
-    return agents, tasks, context_topic, question
+        return agents, tasks, context_topic, question
 
 
 ############################################################################################################
-# Selecting the crew and initializing tasks
+# Selecionando a equipe e inicializando as tarefas
 ############################################################################################################
 agents, tasks, context_topic, question = select_crew()
 
-# Setting up the crew (Crew)
+# Verificando o valor de question e exibindo uma mensagem apropriada
+if question is not None:
+    print(f"Research question: {question}")
+else:
+    print("No specific question was set for this crew.")
+
+# Configurando a equipe (Crew)
 crew = Crew(
-    # List of agents in the crew
+    # Lista de agentes na equipe
     agents=agents,
 
-    # List of tasks to be performed by the crew
+    # Lista de tarefas a serem executadas pela equipe
     tasks=tasks,
 
-    process=Process.sequential,  # Sequential process for task execution
-    manager_llm=llm,  # Setting the LLM to manage the crew
+    process=Process.sequential,  # Processo sequencial para execução das tarefas
+    manager_llm=llm,  # Definindo o LLM para gerenciar a equipe
     verbose=True
 )
 
-# Starting the process
+# Iniciando o processo
 result = crew.kickoff()
 print(result)

@@ -1,0 +1,8 @@
+1. TeeChu YouTube video on February 2024 Gaming Anniversaries: [Link](https://www.youtube.com/watch?v=O61NQg31NKA)
+2. TeeChu Instagram post on February 4, 2024: [Link](https://www.instagram.com/teechudesigns/p/C27-wodIQSp/)
+3. TeeChu YouTube video on HUGE 2024 Video Game Anniversaries: [Link](https://www.youtube.com/watch?v=VqVbuNXK53s)
+4. TeeChu website Gaming page: [Link](https://www.teechu.com/gaming)
+5. Threads post on TeeChu's 2024 Gaming Anniversaries: [Link](https://www.threads.net/@teechudesigns/post/C1pivYxI-G_)
+6. GamesRadar article on the biggest video game anniversaries of 2024: [Link](https://www.gamesradar.com/video-game-anniversaries-2024/)
+7. WhatCulture Gaming YouTube video on Every MAJOR Video Game Coming In February 2024: [Link](https://www.youtube.com/watch?v=TZ8KddABEHw)
+8. Threads post on Pokémon 20th Anniversary exclusive Pokémon Center merch: [Link](https://www.threads.net/@wasabi_doughnut/post/C3vxUKPyeut)
