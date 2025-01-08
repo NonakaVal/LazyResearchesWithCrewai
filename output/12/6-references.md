@@ -1,1 +1,0 @@
-The comprehensive list of sources used during the research, including detailed descriptions and links, has been compiled based on the search results gathered for each title mentioned in the context. The list includes sources from Reddit, YouTube, DataCamp, GitHub, and other platforms related to CrewAI project ideas and tutorials.

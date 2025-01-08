@@ -1,1 +1,0 @@
-Não foi possível encontrar uma tradução direta do documento científico fornecido para o português brasileiro. Como alternativa, sugiro a contratação de um tradutor profissional especializado em tradução de textos científicos para garantir a precisão e fidelidade ao conteúdo original.

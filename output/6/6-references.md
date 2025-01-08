@@ -1,5 +1,0 @@
-1. Harvard Business Review: "What Separates a Good Data Scientist from a Great One" by Thomas C. Redman discusses the importance of building strong organizational capabilities to leverage data effectively. [Link](https://hbr.org/2013/01/the-great-data-scientist-in-fo)
-
-2. Pathrise: "The importance of a data science portfolio - 2023 update" by Alex MacPherson emphasizes the significance of data science portfolios in showcasing real-world experience and impact. [Link](https://www.pathrise.com/guides/the-importance-of-a-data-science-portfolio/)
-
-3. Built In: "What Makes a Data Science Portfolio Stand Out?" by Kerry Halladay provides insights on creating a standout data science portfolio, including project selection, communication, and personalization. [Link](https://builtin.com/data-science/data-science-portfolios)
