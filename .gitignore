@@ -10,9 +10,12 @@ __pycache__/
 
 
 # Virtual environment
+
+
 env/
 venv/
 .env
+.db/
 
 
 # Python environment configuration
