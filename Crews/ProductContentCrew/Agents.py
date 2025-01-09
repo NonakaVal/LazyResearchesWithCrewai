@@ -1,7 +1,7 @@
 from crewai import Agent
 from crewai_tools import SerperDevTool, ScrapeWebsiteTool
 
-def create_product_content_agents(llm):
+def create_product_content_agents_with_emotion(llm):
     # Validador de Fontes
     source_validator = Agent(
         role="Source Validator",
@@ -62,13 +62,24 @@ def create_product_content_agents(llm):
         tools=[SerperDevTool(), ScrapeWebsiteTool()]
     )
 
+    # Analista de Emoção e Narrativa
+    emotion_narrative_analyst = Agent(
+        role="Emotion and Narrative Analyst",
+        goal="Analyze the product and its potential storytelling angle to suggest emotions or narrative elements to highlight.",
+        backstory="A storytelling expert skilled in creating emotional connections through engaging narratives.",
+        llm=llm,
+        allow_delegation=False,
+        tools=[SerperDevTool(), ScrapeWebsiteTool()]
+    )
+
     Agents = [
         source_validator,
         product_researcher,
         competitor_analyst,
         review_analyst,
         content_idea_generator,
-        content_writer
+        content_writer,
+        emotion_narrative_analyst
     ]
 
     return Agents
