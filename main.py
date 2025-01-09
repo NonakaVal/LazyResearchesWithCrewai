@@ -7,13 +7,15 @@ from crewai import Crew, Process
 
 
 # Importando agentes e tarefas de diferentes equipes
-from Crews.Tools import select_output_directory
+from Crews.Tools import select_output_directory, combine_markdown_files
 from Crews.MainSearchCrew.Agents import Search_Agents
 from Crews.MainSearchCrew.Tasks import Search_tasks
 from Crews.StudyPlanCrew.Agents import create_study_project_agents
 from Crews.StudyPlanCrew.Tasks import create_study_project_roadmap_tasks
 from Crews.GameNewsCrew.Agents import create_game_news_agents
 from Crews.GameNewsCrew.Tasks import create_game_news_scraping_tasks
+from Crews.ProductContentCrew.Agents import create_product_content_agents
+from Crews.ProductContentCrew.Tasks import create_product_content_tasks
 
 # Carregar variáveis de ambiente
 load_dotenv()
@@ -35,7 +37,8 @@ def select_crew():
     print("1. Search Crew")
     print("2. Study Plan Crew")
     print("3. Game News Crew")
-    crew_choice = input("Enter 1, 2, or 3: ")
+    print("4. Product Content Crew")  # Nova equipe adicionada
+    crew_choice = input("Enter 1, 2, 3, or 4: ")
     
     if crew_choice == "1":
         context_topic = input("Enter the research context for Search Crew: \n")
@@ -55,6 +58,11 @@ def select_crew():
         agents = create_game_news_agents(llm)
         tasks = create_game_news_scraping_tasks(context_topic, news_category, select_output_directory(context_topic), agents)
         return agents, tasks, context_topic, None
+    elif crew_choice == "4":
+        product_name = input("Enter the name of the product for Product Content Crew: \n")
+        agents = create_product_content_agents(llm)
+        tasks = create_product_content_tasks(product_name, select_output_directory(product_name), agents)
+        return agents, tasks, product_name, None
     else:
         print("Invalid choice, defaulting to Search Crew.")
         context_topic = input("Enter the research context for Search Crew: \n")
@@ -62,7 +70,6 @@ def select_crew():
         agents = Search_Agents(context_topic, question, llm)
         tasks = Search_tasks(question, context_topic, select_output_directory(context_topic), agents)
         return agents, tasks, context_topic, question
-
 
 
 ############################################################################################################
@@ -92,3 +99,8 @@ crew = Crew(
 # Iniciando o processo
 result = crew.kickoff()
 print(result)
+
+output_directory =  select_output_directory(context_topic) # Replace with your actual directory
+combine_markdown_files(output_directory)
+
+
