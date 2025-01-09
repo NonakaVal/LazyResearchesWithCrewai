@@ -85,7 +85,7 @@ def create_product_content_tasks_with_emotion(product_name, output_directory, Ag
         expected_output="A report identifying key emotional triggers and narrative strategies for the product.",
         agent=Agents[6],
         context=[review_analysis_task, content_creation_task],
-        output_file=os.path.join(output_directory, f"{product_name_safe}_7-emotion-narrative.md")
+        output_file=os.path.join(output_directory, f"7-emotion-narrative.md{product_name_safe}_")
     )
 
     return [
