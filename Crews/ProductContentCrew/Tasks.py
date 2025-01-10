@@ -97,3 +97,78 @@ def create_product_content_tasks_with_emotion(product_name, output_directory, Ag
         content_creation_task,
         emotion_narrative_task
     ]
+
+
+
+def create_inbound_content_tasks(product_name, output_directory, Agents):
+    import os
+
+    # Sanitize product name for file paths
+    product_name_safe = product_name.replace(" ", "_").lower()
+
+    # Task 1: In-Depth Market Trends Research
+    market_research_task = Task(
+        description=(
+            f"Conduct an in-depth analysis of current market trends, emerging consumer behaviors, and purchasing patterns related to '{product_name}' "
+            f"within the collectible items industry. Identify growth opportunities, rising niches, and market challenges."
+        ),
+        expected_output="A comprehensive report highlighting market trends, consumer interests, and strategic opportunities for collectible items.",
+        agent=Agents[0],
+        output_file=os.path.join(output_directory, f"1-market-trends-{product_name_safe}.md")
+    )
+
+    # Task 2: Comprehensive Competitor Analysis
+    competitor_analysis_task = Task(
+        description=(
+            f"Analyze competitors' inbound marketing strategies for products similar to '{product_name}'. "
+            f"Identify their strengths, weaknesses, marketing gaps, and areas where we can differentiate our approach."
+        ),
+        expected_output="An actionable competitor analysis report comparing marketing tactics and highlighting opportunities for brand positioning.",
+        agent=Agents[3],
+        context=[market_research_task],
+        output_file=os.path.join(output_directory, f"2-competitor-analysis-{product_name_safe}.md")
+    )
+
+    # Task 3: Innovative Content Format Development
+    content_format_task = Task(
+        description=(
+            f"Develop a variety of creative and engaging content format ideas for promoting '{product_name}', with a primary focus on Instagram and WhatsApp platforms. "
+            f"Include suggestions for social media campaigns, interactive content, reels, stories, and viral marketing tactics."
+        ),
+        expected_output="A detailed list of innovative content formats tailored for Instagram, WhatsApp, and other relevant platforms to maximize audience reach and engagement.",
+        agent=Agents[1],
+        context=[market_research_task],
+        output_file=os.path.join(output_directory, f"3-content-formats-{product_name_safe}.md")
+    )
+
+    # Task 4: Emotional and Engaging Storytelling Framework
+    storytelling_task = Task(
+        description=(
+            f"Craft a compelling and emotionally driven storytelling framework for '{product_name}'. Incorporate key emotional triggers such as nostalgia, exclusivity, "
+            f"and the thrill of collecting. Focus on building a strong emotional connection with the audience."
+        ),
+        expected_output="A well-structured storytelling framework designed to emotionally engage the target audience and elevate the perceived value of the product.",
+        agent=Agents[2],
+        context=[competitor_analysis_task, content_format_task],
+        output_file=os.path.join(output_directory, f"4-storytelling-{product_name_safe}.md")
+    )
+
+    # Task 5: Strategic and Actionable Content Plan
+    content_plan_task = Task(
+        description=(
+            f"Develop a comprehensive and actionable inbound content marketing plan for '{product_name}'. Integrate insights from market trends, competitor analysis, "
+            f"innovative content formats, and emotional storytelling to create a strategy that drives engagement and conversions."
+        ),
+        expected_output="A detailed, step-by-step inbound content marketing strategy aligned with brand goals and audience preferences, ready for implementation.",
+        agent=Agents[4],
+        context=[storytelling_task],
+        output_file=os.path.join(output_directory, f"5-content-plan-{product_name_safe}.md")
+    )
+
+    return [
+        market_research_task,
+        competitor_analysis_task,
+        content_format_task,
+        storytelling_task,
+        content_plan_task
+    ]

@@ -105,3 +105,74 @@ def create_product_content_agents_with_emotion(llm):
     ]
 
     return Agents
+
+
+def create_inbound_content_agents(llm):
+    # Market Analyst
+    market_analyst = Agent(
+        role="Market Trends Analyst",
+        goal="Identify market trends and consumer behaviors related to collectible video items.",
+        backstory=(
+            "A market analysis expert with extensive experience in identifying patterns and trends relevant "
+            "to crafting effective inbound marketing strategies."
+        ),
+        llm=llm,
+        allow_delegation=False,
+        tools=[SerperDevTool(), ScrapeWebsiteTool()]
+    )
+
+    # Format Strategist
+    format_strategist = Agent(
+        role="Format Strategist",
+        goal="Generate creative ideas for content formats (blog posts, videos, carousels, e-books, etc.).",
+        backstory=(
+            "A creative strategist with deep expertise in developing innovative content formats that maximize audience engagement."
+        ),
+        llm=llm,
+        allow_delegation=True,
+        tools=[SerperDevTool()]
+    )
+
+    # Storytelling Specialist
+    storytelling_specialist = Agent(
+        role="Storytelling Specialist",
+        goal="Craft engaging and emotional narratives to highlight the value of collectible items.",
+        backstory=(
+            "A professional storyteller skilled in using narrative techniques to build emotional connections between products and audiences."
+        ),
+        llm=llm,
+        allow_delegation=False,
+        tools=[SerperDevTool()]
+    )
+
+    # Competitor Researcher
+    competitor_researcher = Agent(
+        role="Competitor Researcher",
+        goal="Analyze competitors’ inbound marketing strategies and identify opportunities to stand out.",
+        backstory=(
+            "A competitive research expert who excels at uncovering unique selling points and creative marketing strategies to differentiate the brand."
+        ),
+        llm=llm,
+        allow_delegation=False,
+        tools=[SerperDevTool(), ScrapeWebsiteTool()]
+    )
+
+    # Content Planner
+    content_planner = Agent(
+        role="Content Planner",
+        goal="Develop a strategic inbound content plan tailored to the target audience of collectible items.",
+        backstory=(
+            "A strategic thinker with a background in organizing content calendars and aligning marketing goals with audience needs."
+        ),
+        llm=llm,
+        allow_delegation=True,
+        tools=[SerperDevTool()]
+    )
+
+    return [
+        market_analyst,
+        format_strategist,
+        storytelling_specialist,
+        competitor_researcher,
+        content_planner
+    ]
