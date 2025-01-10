@@ -1,5 +1,0 @@
-The Sony PlayStation Classic is a miniature console that aims to bring back the nostalgia of early 3D gaming. It comes with 20 early CD-ROM games pre-installed, offering a throwback experience to the era of classic gaming. The console features 16 GB of eMMC flash storage and 1 GB of DDR3 memory. It uses the ReARMed branch of the free and open-source emulator PCSX.
-
-Reviews and opinions about the PlayStation Classic vary. Some users find it to be a fun throwback experience, appreciating the attractive and easy-to-use front-end menu system. However, others criticize the console for its weak graphics, limited settings, and poor emulation quality. The lack of some big-name titles also impacts its appeal as an essential greatest hits compilation of the era.
-
-Despite mixed reviews, the PlayStation Classic has been praised for its design and attention to detail. It offers a collection of games that may not please everyone but can still provide an enjoyable gaming experience for those looking to relive the early days of gaming.

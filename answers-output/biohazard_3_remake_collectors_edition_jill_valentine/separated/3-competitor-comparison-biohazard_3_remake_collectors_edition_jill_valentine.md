@@ -1,1 +1,0 @@
-The IGN Store's Statues Collection offers premium collectible statues that capture intricate details of iconic figures from the gaming and entertainment world, crafted from high-quality materials and serving as a testament to artistry and fandom.
