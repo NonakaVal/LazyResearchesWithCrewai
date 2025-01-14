@@ -1,1 +1,0 @@
-The new questions formulated based on the importance of sustainable mining practices are aimed at exploring the environmental, social, and economic aspects of sustainable mining, technological innovations, challenges, opportunities, and the overall impact on the industry and communities.

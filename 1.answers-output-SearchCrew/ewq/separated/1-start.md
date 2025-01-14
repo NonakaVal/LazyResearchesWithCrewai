@@ -1,1 +1,0 @@
-Unfortunately, the content on the DQ Assessment website could not be accessed as it requires JavaScript to run the app. For a comprehensive dataset organized for subsequent analysis on the DQ Assessment and Global DQ Index, further exploration of other validated sources may be necessary.

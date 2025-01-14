@@ -1,1 +1,0 @@
-As the content of the sources is extensive and varied, it cannot be presented here in its entirety.

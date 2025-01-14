@@ -53,13 +53,13 @@ def select_crew():
         context_topic = input("Enter the research context for Search Crew: \n")
         question = input("Enter the research question for Search Crew: \n")
         agents = Search_Agents(context_topic, question, llm)
-        separated_folder, combined_folder = select_output_directory("1.answers-output-SearchCrew", context_topic)
+        separated_folder, combined_folder = select_output_directory("output/1.answers-output-SearchCrew", context_topic)
         tasks = Search_tasks(question, context_topic, separated_folder, agents)
     elif crew_choice == "2":
         context_topic = input("Enter the research context for Study Plan Crew: \n")
         question = input("Enter the research question for Study Plan Crew: \n")
         agents = create_study_project_agents(context_topic, question, llm)
-        separated_folder, combined_folder = select_output_directory("2.answers-output-StudyPlanCrew", context_topic)
+        separated_folder, combined_folder = select_output_directory("output/2.answers-output-StudyPlanCrew", context_topic)
         tasks = create_study_project_roadmap_tasks(context_topic, separated_folder, agents)
 
 
