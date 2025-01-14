@@ -16,10 +16,7 @@ from Crews.MainSearchCrew.Agents import Search_Agents
 from Crews.MainSearchCrew.Tasks import Search_tasks
 from Crews.StudyPlanCrew.Agents import create_study_project_agents
 from Crews.StudyPlanCrew.Tasks import create_study_project_roadmap_tasks
-from Crews.GameNewsCrew.Agents import create_game_news_agents
-from Crews.GameNewsCrew.Tasks import create_game_news_scraping_tasks
-from Crews.ProductContentCrew.Agents import create_product_content_agents_with_emotion , create_inbound_content_agents
-from Crews.ProductContentCrew.Tasks import create_product_content_tasks_with_emotion, create_inbound_content_tasks
+
 
 
 
@@ -47,9 +44,6 @@ def select_crew():
     print("Select the crew you want to use:")
     print("1. Search Crew")
     print("2. Study Plan Crew")
-    print("3. Game News Crew")
-    print("4. Product Content Crew with Emotion Analysis")
-    print("5. Product Content Crew with create_inbound_content_tasks")
 
 
     crew_choice = input("Enter 1, 2, 3, 4 or 5: ")
@@ -67,31 +61,7 @@ def select_crew():
         agents = create_study_project_agents(context_topic, question, llm)
         separated_folder, combined_folder = select_output_directory("2.answers-output-StudyPlanCrew", context_topic)
         tasks = create_study_project_roadmap_tasks(context_topic, separated_folder, agents)
-    elif crew_choice == "3":
-        context_topic = input("Enter the gaming topic or genre for Game News Crew: \n")
-        news_category = input("Enter the news category (e.g., reviews, updates, launches): \n")
-        agents = create_game_news_agents(llm)
-        separated_folder, combined_folder = select_output_directory("3.answers-output-GameNewsCrew", context_topic)
-        tasks = create_game_news_scraping_tasks(context_topic, news_category, separated_folder, agents)
-    elif crew_choice == "4":
-        product_name = input("Enter the name of the product for Product Content Crew: \n")
-        agents = create_inbound_content_agents(llm)
-        separated_folder, combined_folder = select_output_directory("4.answers-output-ProductContentCrew", product_name)
-        tasks = create_inbound_content_tasks(product_name, separated_folder, agents)
-        context_topic = product_name
-    elif crew_choice == "5":
-        product_name = input("Enter the name of the product for Product Content Crew: \n")
-        agents = create_product_content_agents_with_emotion(llm)
-        separated_folder, combined_folder = select_output_directory("5.answers-output-ProductInboundCrew", product_name)
-        tasks = create_product_content_tasks_with_emotion(product_name, separated_folder, agents)
-        context_topic = product_name
-    else:
-        print("Invalid choice, defaulting to Search Crew.")
-        context_topic = input("Enter the research context for Search Crew: \n")
-        question = input("Enter the research question for Search Crew: \n")
-        agents = Search_Agents(context_topic, question, llm)
-        separated_folder, combined_folder = select_output_directory("answers-output", context_topic)
-        tasks = Search_tasks(question, context_topic, separated_folder, agents)
+
 
     return agents, tasks, separated_folder, combined_folder, context_topic
 
@@ -99,6 +69,8 @@ def select_crew():
 ############################################################################################################
 # Main Function
 ############################################################################################################
+
+
 def main():
     # Select the crew and configure tasks
     agents, tasks, separated_folder, combined_folder, context_topic = select_crew()

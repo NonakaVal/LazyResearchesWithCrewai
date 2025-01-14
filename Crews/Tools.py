@@ -1,4 +1,3 @@
-
 from builtins import input, print, open, enumerate, len, range
 import os
 
@@ -23,7 +22,6 @@ def select_output_directory(base_folder, context_topic):
     os.makedirs(combined_folder, exist_ok=True)
 
     return separated_folder, combined_folder
-
 
 ############################################################################################################
 # Função para combinar arquivos Markdown em uma pasta separada
@@ -56,9 +54,6 @@ def combine_markdown_files_with_folders(separated_folder, combined_folder, combi
     print(f"Combined file created at: {combined_filepath}")
     return combined_filepath
 
-
-
-############################################################################################################
 ############################################################################################################
 # Função para traduzir arquivos individuais e combiná-los
 ############################################################################################################
@@ -71,8 +66,11 @@ def translate_and_combine_markdown_files(separated_folder, combined_folder, comb
     md_files = [f for f in os.listdir(separated_folder) if f.endswith(".md")]
     md_files.sort()  # Garantir ordem dos arquivos
 
-    # Caminho completo para o arquivo combinado traduzido
-    translated_combined_filepath = os.path.join(combined_folder, combined_filename.replace(".md", "-ptbr.md"))
+    # Definindo o caminho fixo para o arquivo traduzido
+    translated_combined_filepath = os.path.join(
+        r"C:\\Users\\nonak\\OneDrive\\Área de Trabalho\\ObsidianVault\\ZETA\\LLM-searches",
+        combined_filename.replace(".md", "-ptbr.md")
+    )
 
     translated_parts = []
 
